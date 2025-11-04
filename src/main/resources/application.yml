@@ -1,0 +1,43 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /api/v1
+
+# H2 Database
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:8000/expense_summary
+    #jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: system
+    #jpa:
+    #database-platform: org.hibernate.dialect.Oracle10gDialect
+    #org.hibernate.dialect.H2Dialect
+  jackson:
+    default-property-inclusion: NON_NULL
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #info,health,beans
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: expenses-summary
+    description: Project for daily expenses
+    version: 1.0
+
+expenses:
+  mandatoryHeaders: x-user-info,x-user-uuid
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{uuid}] %-5level %logger{36} - %msg%n"
